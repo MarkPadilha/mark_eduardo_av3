@@ -1,0 +1,155 @@
+create database dbRestaurante;
+use dbRestaurante;
+
+drop database dbRestaurante;
+
+select * from funcionario;
+select * from prato;
+select * from pedido;
+select * from pedido_prato;
+
+
+delete from pedido where id='2';
+delete from pedido_prato where id=2;
+
+/*INSERT FUNCIONARIO*/
+insert into funcionario values (1,"Eduardo Abreu","eduardo.abreu",2612);
+insert into funcionario values (2,"Mark Padilha","mark.padilha",1234);
+
+
+/*insert que vai vir do html*/
+insert pedido (nome_cliente, status_pedido, em_atendimento, numero_mesa,
+preco_total) values ('jorivaldo',false,false,1,162.90);
+
+
+/*INSERT NA TABELA PEDIDO*/
+insert into pedido (id, nome_cliente,status_pedido,em_atendimento,
+numero_mesa,preco_total) 
+values (4,"Cliente Teste 4",0,0,6,10);
+/*INSERT NA TABELA PEDIDO_PRATO*/
+insert into pedido_prato values(4,4,22);
+
+
+
+select * from pedido;
+select * from pedido_prato;
+
+delete from pedido where id='6';
+delete from pedido_prato where id=7;
+
+
+/*BUSCAR TODOS DA TABELA PEDIDO_PRATO*/
+select pedido_prato.id ,prato.nome AS `Nome do prato`, pedido.nome_cliente as `Nome cliente`, 
+pedido.em_atendimento as `Em atendimento`, pedido.data_hora_pedido
+as `Data/Hora Pedido`, pedido.numero_mesa as `Número da mesa` from pedido_prato
+JOIN pedido on pedido_prato.id_pedido = pedido.id
+JOIN prato on pedido_prato.id_prato = prato.id;
+
+
+
+
+
+
+
+/*INSERT NA TABELA PEDIDO*/
+insert into pedido (nome_cliente,status_pedido,em_atendimento,
+numero_mesa,preco_total) 
+values ("Cliente Teste 4",0,0,12,10);
+/*INSERT NA TABELA PEDIDO_PRATO*/
+insert into pedido_prato (id_pedido,id_prato) values(6,3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*INSERT NA TABELA PEDIDO 2*/
+insert into pedido (id,nome_cliente,status_pedido,em_atendimento,
+numero_mesa,preco_total) 
+values (2,"Tadalafilo da Silva",0,0,09,215.99);
+/*INSERT NA TABELA PEDIDO_PRATO 2*/
+insert into pedido_prato values(2,2,5);
+
+/*INSERT NA TABELA PEDIDO 3*/
+insert into pedido (id,nome_cliente,status_pedido,em_atendimento,
+numero_mesa,preco_total) 
+values (3,"ClienteTeste 3",0,0,15,99.80);
+/*INSERT NA TABELA PEDIDO_PRATO 3*/
+insert into pedido_prato values(5,3,20);
+
+
+
+UPDATE pedido SET em_atendimento = true where id = 2;
+
+UPDATE pedido SET nome_cliente = 'ClienteTeste 2' WHERE id =2;
+
+
+
+INSERT INTO prato (id, nome, preco) VALUES 
+  (1, 'Frango Grelhado', '12.99'),
+  (2, 'Massa Carbonara', '15.50'),
+  (3, 'Sushi de Salmão', '18.99'),
+  (4, 'Hambúrguer Clássico', '9.99'),
+  (5, 'Salada Caesar', '8.50'),
+  (6, 'Pizza Margherita', '14.99'),
+  (7, 'Tacos de Carne Asada', '11.75'),
+  (8, 'Frango à Parmegiana', '16.99'),
+  (9, 'Sopa de Tomate', '6.50'),
+  (10, 'Camarão ao Alho e Óleo', '20.99'),
+  (11, 'Churrasco de Costelas', '22.50'),
+  (12, 'Ceviche de Peixe Branco', '17.25'),
+  (13, 'Macarrão Alfredo', '13.99'),
+  (14, 'Sanduíche de Peito de Peru', '7.99'),
+  (15, 'Risoto de Cogumelos', '19.50'),
+  (16, 'Tartare de Atum', '25.99'),
+  (17, 'Poke Bowl de Salmão', '21.99'),
+  (18, 'Burrito de Frango', '10.99'),
+  (19, 'Lasanha de Carne', '14.75'),
+  (20, 'Salada de Quinoa', '12.25'),
+  (21, 'Peixe Grelhado com Limão', '16.50'),
+  (22, 'Wrap de Vegetais', '9.25'),
+  (23, 'Picanha ao Molho Barbecue', '23.50'),
+  (24, 'Tiramisu', '8.99'),
+  (25, 'Sorvete de Chocolate', '5.75'),
+  (26, 'Panquecas com Xarope de Maple', '11.99'),
+  (27, 'Crepes de Morango', '9.50'),
+  (28, 'Molho de Tomate Artesanal', '7.25'),
+  (29, 'Sopa de Lentilhas', '6.99'),
+  (30, 'Cheesecake de Framboesa', '18.25'),
+  (31, 'Burrito Vegetariano', '11.99'),
+  (32, 'Frango ao Curry', '14.75'),
+  (33, 'Caesar Wrap', '9.25'),
+  (34, 'Peixe ao Vapor', '17.50'),
+  (35, 'Arroz Frito com Legumes', '10.99'),
+  (36, 'Salada de Frutas', '7.50'),
+  (37, 'Wrap de Salmão', '15.99'),
+  (38, 'Costeletas de Cordeiro', '22.75'),
+  (39, 'Sopa de Abóbora', '8.99'),
+  (40, 'Cevada com Legumes', '12.50'),
+  (41, 'Pasta Primavera', '13.25'),
+  (42, 'Bolinho de Bacalhau', '16.50'),
+  (43, 'Sorvete de Baunilha', '5.75'),
+  (44, 'Sanduíche de Frango Grelhado', '9.50'),
+  (45, 'Molho Pesto', '7.25'),
+  (46, 'Fondue de Queijo', '19.99'),
+  (47, 'Batata Assada com Sour Cream', '8.50'),
+  (48, 'Tofu com Gergelim', '14.25'),
+  (49, 'Mousse de Chocolate', '6.99'),
+  (50, 'Salada de Frango com Abacaxi', '11.50'),
+  (51, 'Bife Tártaro', '24.50'),
+  (52, 'Tacos de Camarão', '18.75'),
+  (53, 'Ramen de Porco', '15.25'),
+  (54, 'Salada de Lentilhas', '10.50'),
+  (55, 'Molho de Cogumelos', '7.99'),
+  (56, 'Pão de Alho', '5.25'),
+  (57, 'Lasanha Vegetariana', '12.99'),
+  (58, 'Smoothie de Frutas Tropicais', '8.50'),
+  (59, 'Nachos com Guacamole', '13.75'),
+  (60, 'Creme Brulée', '16.25');

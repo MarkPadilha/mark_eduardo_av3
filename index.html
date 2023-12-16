@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Página para fazer seu pedido!</title>
+</head>
+<body>
+    <header></header>
+    <main>
+        <section class="container">
+            <h1 class="container_title">Faça seu pedido</h1>
+            <form  method="post, get" id="form"  class="container_form">
+                <label class="container_title" for="nome_completo">Informe seu nome completo: </label>
+                <input type="text" id="nome_completo" name="nome_completo">
+                <label class="container_title" for="mesa">Informe o número da sua mesa: </label>
+                <input type="number" id="mesa" name="mesa">
+
+                
+                <label class="container_title" for="id_prato">Informe o número do prato:</label>
+                <input type="number" id="id_prato" name="id_prato"><br>
+                
+                <input id="botao" type="submit" value="Realizar pedido">
+            </form>
+        </section>
+
+        <script>
+            $(document).ready(function(){
+                $("form").submit(function(event){
+                        event.preventDefault();
+
+                        var nome = $("#nome_completo").val()
+                        var mesa = $("#mesa").val()
+                        var prato_id = $("#id_prato").val()
+                        
+                        var pedido = {
+                            nome_cliente: nome,
+                            numero_mesa: mesa,
+                            prato: prato_id,
+                            status_pedido: false,
+                            em_atendimento: false
+                        };
+                            var pedidoString = JSON.stringify(pedido)
+                            var idPRATOO = pedido.prato
+                        
+                        $.ajax({
+                            type: 'POST',
+                            url: 'http://localhost:3000/post',
+                            contentType: "application/json",
+                            data: pedidoString,
+                            success: function(response) {
+        
+                                //recupera o id gerado no post (resposta do servidor após o post é um json com id e uma mensagem de pedido enviado com sucesso)
+
+                            var pedidoId = response.id;
+
+                                var pedido_prato = {
+                                    id_pedido: pedidoId,
+                                    id_prato: pedido.prato,
+                                }
+
+                                var pedidopratoJSON = JSON.stringify(pedido_prato)
+                                
+                                
+                                $.ajax({
+                                    type:'POST',
+                                          /*/post_pedido_prato/:idPedido/:idPrato*/
+                                    url: 'http://localhost:3000/post_pedido_prato/'+pedidoId+'/'+idPRATOO,
+                                    contentType: "application/json",
+                                    data: pedidopratoJSON
+                                })
+                            
+                            alert('Obrigado pela preferência ' + pedido.nome_cliente);
+
+
+
+                            },
+                            error: function(error) {
+                            console.error("Erro na requisição:", error);
+                            }
+                        });
+
+
+                        
+
+                         
+                    });
+                 
+            });
+
+            /*   $(document).ready(function(){
+        $("form").submit(function(event){
+            event.preventDefault();
+
+            var num_prato = $("#id_prato").val();
+
+            
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/${num_prato}/preco`,
+                success: function(preco){
+                    
+                    var nome = $("#nome_completo").val();
+                    var mesa = $("#mesa").val();
+
+                    var precoValue = JSON.parse(preco);
+                    
+                    var pedido = {
+                        nome_cliente: nome,
+                        numero_mesa: mesa,
+                        prato: num_prato,
+                        preco_total: precoValue,
+                        status_pedido: false,
+                        em_atendimento: false
+                    };
+
+                    
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost:3000/post',
+                        contentType: 'application/json',
+                        data: JSON.stringify(pedido)
+                        
+                    });
+                    
+                }
+                
+            })
+        
+        });
+    }); */ 
+              
+        </script>
+
+    </main>
+    <footer></footer>
+    
+</body>
+</html>

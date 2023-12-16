@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Open+Sans:ital@1&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0; 
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(1, 1, 96);
+    color: aliceblue;
+
+}
+
+.container{
+    margin-top: 120px;
+    text-align: center;
+    background-color: rgb(15, 19, 137);
+    padding: 50px;
+    width: 500px;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif; 
+
+
+}
+
+.container_title{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.pratos{
+    padding: 10px;
+    display:flex;
+    justify-content: space-between;
+    
+}
+
+
+#botao{
+    margin-top: 5px;
+    padding: 3px;
+    width: 100px;
+}
